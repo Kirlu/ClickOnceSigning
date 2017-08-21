@@ -6,7 +6,7 @@ $publishVersionDir = $publishDir + 'Application Files\' + $publishVersionDir
 
 $cmd = $solutionDir + '3rdParty\Signtool\signtool.exe'
 
-$sha1 = Get-ChildItem -Path Cert:\CurrentUser\My -Recurse |  where {$_.Subject -like '*Accuratech*'} | Select-Object -First 1
+$sha1 = Get-ChildItem -Path Cert:\CurrentUser\My -Recurse |  where {$_.Subject -like '*Company*'} | Select-Object -First 1
 $sha1 = $sha1."Thumbprint"
 
 #Sign version executable
@@ -26,12 +26,12 @@ $cmd
 Invoke-Expression $cmd
 
 #Sign executable manifest file
-$cmd = $solutionDir + '3rdParty\Signtool\mage.exe -u ''' + $publishVersionDir + '\' + $assemblyName + '.exe.manifest''  -ch ' + $sha1 + '  -fd ''' + $publishVersionDir + ''' -ti http://timestamp.digicert.com -pub ''Accuratech APS'' -um ''True'''
+$cmd = $solutionDir + '3rdParty\Signtool\mage.exe -u ''' + $publishVersionDir + '\' + $assemblyName + '.exe.manifest''  -ch ' + $sha1 + '  -fd ''' + $publishVersionDir + ''' -ti http://timestamp.digicert.com -pub ''Company Name'' -um ''True'''
 $cmd
 Invoke-Expression $cmd
 
 #Sign application manifest file with
-$cmd = $solutionDir + '3rdParty\Signtool\mage.exe -u ''' + $publishDir + $assemblyName + '.application'' -appm ''' + $publishVersionDir + '\' + $assemblyName + '.exe.manifest'' -ch ' + $sha1 + '  -ti http://timestamp.digicert.com -pub ''Accuratech APS'' -um ''True'''
+$cmd = $solutionDir + '3rdParty\Signtool\mage.exe -u ''' + $publishDir + $assemblyName + '.application'' -appm ''' + $publishVersionDir + '\' + $assemblyName + '.exe.manifest'' -ch ' + $sha1 + '  -ti http://timestamp.digicert.com -pub ''Company Name'' -um ''True'''
 $cmd
 Invoke-Expression $cmd
 
