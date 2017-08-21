@@ -1,4 +1,4 @@
-param([string] $solutionDir, [string] $publishDir, [string] $assemblyName='office2')
+param([string] $solutionDir, [string] $publishDir, [string] $assemblyName)
 
 $publishVersionDir = Get-ChildItem -Path $publishDir'\Application Files\' | ?{$_.PSIsContainer } | Sort-Object BaseName -Descending | Select-Object -First 1
 $publishVersionDir = $publishDir + 'Application Files\' + $publishVersionDir
